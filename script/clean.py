@@ -23,7 +23,7 @@ for sublist in rows:
     for item in sublist:
         flat_list.append(item)
 
-words_list = [item.upper() for item in flat_list]
+words_list = [item.lower() for item in flat_list]
 
 bad_chars = ['!', "-"]
 for i in range(len(words_list)):
@@ -32,8 +32,6 @@ for i in range(len(words_list)):
     words_list[i] = ''.join((filter(lambda i: i not in bad_chars, words_list[i])))
 
 #save all clean words in csv file
-#with open('amajambo_cleanedV1.csv', 'w', newline='') as f:
-  #csv_out = csv.writer(f)
 with f1:
     csv_out1 = csv.writer(f1)
     csv_out1.writerows([words_list[index]] for index in range(0, len(words_list)))
@@ -63,8 +61,6 @@ res = five_letter(words_list)
 
 print("Number of elements in our new list of 5 letter words: ", get_number_of_elements(res))
 #save all clean words in csv file
-#with open('amajambo_5letters.csv', 'w', newline='') as f:
-  #csv_out = csv.writer(f)
 with f2:
     csv_out2 = csv.writer(f2)
     csv_out2.writerows([res[index]] for index in range(0, len(res)))
