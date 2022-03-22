@@ -52,10 +52,10 @@ def five_letter(words):
     return new_wordlist 
 
 res = five_letter(words_list)
-
+print(res)
 print("Number of elements in our new list of 5 letter words: ", get_number_of_elements(res))
 #save all clean words in csv file
 with open('amajambo_5letters.csv', 'w', newline='') as f:
   csv_out = csv.writer(f)
-  csv_out.writerows([words_list[index]] for index in range(0, len(res)))
+  csv_out.writerows([res[index]] for index in range(0, len(res)))
 
