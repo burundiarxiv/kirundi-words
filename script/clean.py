@@ -3,9 +3,16 @@ from os import sep
 import unidecode
 import pandas as pd
 
+
 path = ''
 file = open(path + "amajambo.csv")
 csvreader = csv.reader(file)
+
+#output files
+f1 = open('amajambo_cleanedV1.csv', 'w', newline='')
+
+f2 = open('amajambo_5letters.csv', 'w', newline='')
+
 
 rows = []
 for row in csvreader:
@@ -19,16 +26,17 @@ for sublist in rows:
 words_list = [item.upper() for item in flat_list]
 
 bad_chars = ['!', "-"]
-
 for i in range(len(words_list)):
     # remove ascents
     words_list[i] = unidecode.unidecode(words_list[i])
     words_list[i] = ''.join((filter(lambda i: i not in bad_chars, words_list[i])))
 
 #save all clean words in csv file
-with open('amajambo_cleanedV1.csv', 'w', newline='') as f:
-  csv_out = csv.writer(f)
-  csv_out.writerows([words_list[index]] for index in range(0, len(words_list)))
+#with open('amajambo_cleanedV1.csv', 'w', newline='') as f:
+  #csv_out = csv.writer(f)
+with f1:
+    csv_out1 = csv.writer(f1)
+    csv_out1.writerows([words_list[index]] for index in range(0, len(words_list)))
 
 #count number of words in our list
 def get_number_of_elements(list):
@@ -55,7 +63,11 @@ res = five_letter(words_list)
 
 print("Number of elements in our new list of 5 letter words: ", get_number_of_elements(res))
 #save all clean words in csv file
-with open('amajambo_5letters.csv', 'w', newline='') as f:
-  csv_out = csv.writer(f)
-  csv_out.writerows([res[index]] for index in range(0, len(res)))
+#with open('amajambo_5letters.csv', 'w', newline='') as f:
+  #csv_out = csv.writer(f)
+with f2:
+    csv_out2 = csv.writer(f2)
+    csv_out2.writerows([res[index]] for index in range(0, len(res)))
+
+
 
