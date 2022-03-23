@@ -1,18 +1,25 @@
 import csv
+from operator import ne
 from os import sep
 import unidecode
 import pandas as pd
-
+import itertools
+import ast
 
 path = ''
 file = open(path + "amajambo.csv")
 csvreader = csv.reader(file)
 
+#file to merge
+new_file = open(path + "amajambo_6.txt", "r")
+linesreader = new_file.read()
+
+# Converting string to list
+lines = ast.literal_eval(linesreader)
+
 #output files
 f1 = open('amajambo_cleanedV1.csv', 'w', newline='')
-
-f2 = open('amajambo_5letters.csv', 'w', newline='')
-
+f2 = open('amajambo_6.csv', 'w', newline='')
 
 rows = []
 for row in csvreader:
@@ -44,26 +51,29 @@ def get_number_of_elements(list):
     return count
 
 print("Number of elements in the entire list: ", get_number_of_elements(words_list))
+print("Number of elements in the list to merge: ", get_number_of_elements(lines))
 
-#letters_count = [len(i) for i in words_list]
-
-#print(letters_count)
-
-# find words with only 5 letters
+# find words with only specific number of letters
 def five_letter(words):
     new_wordlist = []
     for item in words:
-        if len(item) == 5:
+        if len(item) == 6:
             new_wordlist += [item]
     return new_wordlist 
 
 res = five_letter(words_list)
 
-print("Number of elements in our new list of 5 letter words: ", get_number_of_elements(res))
+res2 = res.copy()
+for w in lines:
+    res2.append(w)
+
+print("Number of elements in our new list of words extracted from amajambo: ", get_number_of_elements(res))
+print("Number of elements in the merged list: ", get_number_of_elements(res2))
 #save all clean words in csv file
 with f2:
     csv_out2 = csv.writer(f2)
-    csv_out2.writerows([res[index]] for index in range(0, len(res)))
+    csv_out2.writerows([res2[index]] for index in range(0, len(res2)))
+
 
 
 
