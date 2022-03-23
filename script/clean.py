@@ -11,7 +11,7 @@ file = open(path + "amajambo.csv")
 csvreader = csv.reader(file)
 
 #file to merge
-new_file = open(path + "amajambo_6.txt", "r")
+new_file = open(path + "amajambo_8.txt", "r")
 linesreader = new_file.read()
 
 # Converting string to list
@@ -19,7 +19,7 @@ lines = ast.literal_eval(linesreader)
 
 #output files
 f1 = open('amajambo_cleanedV1.csv', 'w', newline='')
-f2 = open('amajambo_6.csv', 'w', newline='')
+f2 = open('amajambo_8.csv', 'w', newline='')
 
 rows = []
 for row in csvreader:
@@ -57,7 +57,7 @@ print("Number of elements in the list to merge: ", get_number_of_elements(lines)
 def five_letter(words):
     new_wordlist = []
     for item in words:
-        if len(item) == 6:
+        if len(item) == 8:
             new_wordlist += [item]
     return new_wordlist 
 
