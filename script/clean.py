@@ -1,9 +1,7 @@
 import csv
-from operator import ne
 from os import sep
 import unidecode
 import pandas as pd
-import itertools
 import ast
 
 path = ''
@@ -67,12 +65,13 @@ res2 = res.copy()
 for w in lines:
     res2.append(w)
 
+res3 = sorted(res2)
 print("Number of elements in our new list of words extracted from amajambo: ", get_number_of_elements(res))
 print("Number of elements in the merged list: ", get_number_of_elements(res2))
 #save all clean words in csv file
 with f2:
     csv_out2 = csv.writer(f2)
-    csv_out2.writerows([res2[index]] for index in range(0, len(res2)))
+    csv_out2.writerows([res3[index]] for index in range(0, len(res3)))
 
 
 
